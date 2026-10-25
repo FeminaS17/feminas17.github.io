@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Femina Senjaliya | AI Engineer</title>
+<meta name="description" content="AI engineer building production systems that combine vision, language, audio, and retrieval.">
+<meta property="og:title" content="Femina Senjaliya | AI Engineer">
+<meta property="og:description" content="Production systems that combine vision, language, audio, and retrieval.">
+<meta property="og:image" content="portrait.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>">
+<style>
+/* ---------------------------------------------------------------
+   Self-contained. No external fonts, scripts, stylesheets or fetches.
+   Companion file: portrait.jpg (must sit beside this file).
+   --------------------------------------------------------------- */
+:root {
+  --bg:#faf9f7; --bg-tint:#f2efea; --surface:#fff;
+  --border:#e6e2dc; --border-str:#d6d1c8;
+  --text:#17181a; --text-soft:#56534d; --text-mute:#8b8780;
+  --accent:#0d6e6b; --accent-2:#0a5250; --accent-sft:#e4f0ef;
+  --warm:#c2683a; --warm-sft:#fbeee6;
+  --shadow:0 1px 2px rgba(23,24,26,.04), 0 12px 32px -16px rgba(23,24,26,.16);
+  --shadow-lift:0 2px 4px rgba(23,24,26,.05), 0 24px 52px -20px rgba(23,24,26,.28);
+  --r:12px;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#101116; --bg-tint:#171920; --surface:#181a21;
+    --border:#2a2e37; --border-str:#3a4049;
+    --text:#eceae7; --text-soft:#a9a69f; --text-mute:#787570;
+    --accent:#45c7bf; --accent-2:#6fd8d1; --accent-sft:#13302e;
+    --warm:#e8945f; --warm-sft:#2e1f16;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 12px 32px -16px rgba(0,0,0,.6);
+    --shadow-lift:0 2px 4px rgba(0,0,0,.35), 0 24px 52px -20px rgba(0,0,0,.8);
+  }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* ---- animated aurora behind the hero ---- */
+.aurora{position:fixed;inset:-30vh 0 auto 0;height:95vh;pointer-events:none;z-index:0;overflow:hidden}
+.aurora i{
+  position:absolute;display:block;border-radius:50%;filter:blur(70px);opacity:.5;
+  animation:drift 22s ease-in-out infinite;
+}
+.aurora i:nth-child(1){width:42rem;height:28rem;left:52%;top:-6rem;background:var(--accent-sft)}
+.aurora i:nth-child(2){width:32rem;height:24rem;left:4%;top:4rem;background:var(--warm-sft);animation-delay:-7s;animation-duration:28s}
+.aurora i:nth-child(3){width:26rem;height:20rem;left:30%;top:14rem;background:var(--accent-sft);animation-delay:-14s;animation-duration:34s;opacity:.35}
+@keyframes drift{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  33%{transform:translate3d(-3rem,2rem,0) scale(1.1)}
+  66%{transform:translate3d(2.5rem,-1.5rem,0) scale(.95)}
+}
+
+/* ---- scroll progress ---- */
+.progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;z-index:50;
+  background:linear-gradient(90deg,var(--accent),var(--warm));
+  transition:width .08s linear;
+}
+
+.wrap{position:relative;z-index:1;max-width:56rem;margin:0 auto;padding:0 1.5rem 6rem}
+@media (max-width:40rem){.wrap{padding:0 1.15rem 4rem}}
+
+a{color:var(--accent);text-decoration:none}
+a:focus-visible,.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* ---- scroll reveal ---- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ================= HERO ================= */
+.hero{display:grid;gap:3rem;grid-template-columns:1.35fr .85fr;align-items:center;padding:4.5rem 0 4rem}
+@media (max-width:54rem){.hero{grid-template-columns:1fr;gap:2.25rem;padding:3rem 0 2.5rem}.portrait{order:-1}}
+
+.status{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--mono);font-size:.73rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent);
+  background:var(--accent-sft);border-radius:100px;padding:.35rem .8rem;margin-bottom:1.3rem;
+}
+/* long chip copy: on narrow screens let it run to two lines and square off
+   the ends slightly, so a wrapped badge reads deliberate rather than broken */
+@media (max-width:40rem){
+  .status{font-size:.66rem;letter-spacing:.05em;border-radius:10px;line-height:1.55;align-items:flex-start}
+  .status .dot{margin-top:.42rem}
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);position:relative;flex:0 0 auto}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:ping 2s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(3);opacity:0}}
+
+h1{font-size:clamp(2.4rem,7vw,3.7rem);line-height:1.02;margin:0 0 .75rem;letter-spacing:-.035em;font-weight:650}
+.tagline{font-size:clamp(1.05rem,2.6vw,1.3rem);color:var(--text-soft);margin:0 0 1.9rem;font-weight:450;line-height:1.45}
+
+/* rotating modality word */
+.rotor{display:inline-block;position:relative;color:var(--accent);font-weight:650;min-width:6.2ch}
+.rotor span{display:inline-block;animation:swap 1.2s cubic-bezier(.2,.7,.3,1)}
+@keyframes swap{0%{opacity:0;transform:translateY(.5em) rotateX(-40deg)}100%{opacity:1;transform:none}}
+
+.pills{display:flex;flex-wrap:wrap;gap:.55rem}
+.pill{
+  display:inline-flex;align-items:center;gap:.45rem;font-size:.87rem;font-weight:500;
+  color:var(--text-soft);background:var(--surface);border:1px solid var(--border);
+  border-radius:100px;padding:.48rem .95rem;
+  transition:border-color .18s,color .18s,transform .18s,box-shadow .18s;
+}
+.pill:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+.pill svg{width:15px;height:15px;flex:0 0 auto}
+
+.portrait{position:relative;justify-self:center;width:100%;max-width:19rem}
+.portrait::before{content:"";position:absolute;inset:1.1rem -1.1rem -1.1rem 1.1rem;border:1px solid var(--accent);border-radius:var(--r);opacity:.45;transition:inset .4s cubic-bezier(.2,.7,.3,1),opacity .4s}
+.portrait:hover::before{inset:.7rem -1.4rem -1.4rem .7rem;opacity:.8}
+.portrait img{position:relative;display:block;width:100%;height:auto;border-radius:var(--r);box-shadow:var(--shadow-lift);background:var(--bg-tint);transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.portrait:hover img{transform:translateY(-4px)}
+@media (max-width:54rem){.portrait{max-width:15rem}.portrait::before{inset:.8rem -.8rem -.8rem .8rem}}
+
+/* ================= INTRO ================= */
+.intro{max-width:44rem}
+.intro p{font-size:1.1rem;color:var(--text-soft);margin:0 0 1.15rem}
+.intro p:last-child{margin-bottom:0}
+.intro strong{color:var(--text);font-weight:600}
+.lead-rule{width:2.5rem;height:2px;background:var(--accent);border:0;margin:0 0 1.6rem;border-radius:2px}
+
+/* ================= SECTIONS ================= */
+section{margin-top:5rem;scroll-margin-top:2rem}
+.sec-head{display:flex;align-items:baseline;gap:.9rem;margin:0 0 2rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.sec-head h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.15em;color:var(--text-mute);font-weight:600;margin:0;font-family:var(--mono)}
+.sec-head .count{font-family:var(--mono);font-size:.72rem;color:var(--text-mute);margin-left:auto;opacity:.7}
+
+/* ================= SYSTEM CARDS ================= */
+.system{
+  position:relative;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:2.1rem;margin-bottom:1.4rem;box-shadow:var(--shadow);
+  transition:border-color .25s,box-shadow .25s,transform .25s;overflow:hidden;
+}
+.system::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--warm));transform:scaleY(0);transform-origin:top;transition:transform .35s cubic-bezier(.2,.7,.3,1)}
+.system:hover{border-color:var(--border-str);box-shadow:var(--shadow-lift);transform:translateY(-3px)}
+.system:hover::after{transform:scaleY(1)}
+@media (max-width:40rem){.system{padding:1.4rem}}
+
+.num{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.55rem}
+.system-head{display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline;justify-content:space-between;margin-bottom:.55rem}
+.system h3{font-size:1.42rem;margin:0;font-weight:620;letter-spacing:-.02em;line-height:1.25}
+.where{font-family:var(--mono);font-size:.79rem;color:var(--text-mute);white-space:nowrap}
+.system-sub{color:var(--text-soft);margin:0 0 1.8rem;font-size:1.04rem}
+
+.block{margin-bottom:1.6rem}
+.block:last-child{margin-bottom:0}
+.label{font-family:var(--mono);font-size:.71rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-mute);display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem}
+.label::before{content:"";width:10px;height:1px;background:var(--accent);flex:0 0 auto}
+.block p{margin:0 0 .75rem}
+.block p:last-child{margin-bottom:0}
+.block em{color:var(--text);font-style:normal;font-weight:560}
+
+/* ================= PIPELINE ================= */
+.pipeline{display:flex;flex-wrap:wrap;align-items:stretch;gap:.4rem}
+.stage{
+  flex:1 1 8.5rem;background:linear-gradient(180deg,var(--accent-sft),transparent 140%);
+  border:1px solid var(--border);border-radius:8px;padding:.75rem .85rem;
+  font-size:.83rem;line-height:1.45;cursor:default;
+  transition:transform .22s cubic-bezier(.2,.7,.3,1),border-color .22s,box-shadow .22s;
+}
+.stage:hover{transform:translateY(-4px) scale(1.02);border-color:var(--accent);box-shadow:var(--shadow)}
+.stage b{display:block;font-size:.7rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:.3rem;font-weight:700}
+.stage span{color:var(--text-soft)}
+.arrow{align-self:center;color:var(--text-mute);font-size:1rem;line-height:1;flex:0 0 auto}
+@media (max-width:36rem){.pipeline{flex-direction:column}.arrow{transform:rotate(90deg);align-self:flex-start;margin-left:1.3rem}}
+
+/* ================= METRICS ================= */
+.results{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr))}
+.metric{border-left:2px solid var(--accent);padding-left:.85rem}
+.metric .n{display:block;font-size:1.65rem;font-weight:680;letter-spacing:-.03em;line-height:1.15;color:var(--accent);font-variant-numeric:tabular-nums}
+.metric .d{font-size:.83rem;color:var(--text-soft);line-height:1.4;display:block;margin-top:.15rem}
+
+/* ================= STACK TAGS ================= */
+ul.stack{display:flex;flex-wrap:wrap;gap:.35rem;margin:0;padding:0}
+.stack li{
+  list-style:none;font-family:var(--mono);font-size:.74rem;color:var(--text-soft);
+  background:var(--bg-tint);border:1px solid var(--border);border-radius:5px;padding:.24rem .55rem;
+  transition:color .16s,border-color .16s,transform .16s;
+}
+.stack li:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+
+/* ================= PUBLICATIONS ================= */
+.pub{padding:1.05rem .6rem 1.05rem .8rem;border-bottom:1px solid var(--border);border-radius:6px;transition:background .2s,padding-left .2s}
+.pub:last-child{border-bottom:none}
+.pub:hover{background:var(--bg-tint);padding-left:1.1rem}
+.pub .t{display:block;font-weight:560;line-height:1.45}
+.pub .v{font-family:var(--mono);font-size:.78rem;color:var(--text-mute);margin-top:.3rem;display:block}
+
+/* ================= BACKGROUND / FOOTER ================= */
+.edu{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));margin-bottom:1.6rem}
+.edu div{border-left:2px solid var(--border-str);padding-left:1rem;transition:border-color .2s}
+.edu div:hover{border-color:var(--accent)}
+.edu b{display:block;font-weight:600}
+.edu span{font-size:.9rem;color:var(--text-soft)}
+
+footer{margin-top:5rem;padding:2.4rem 0 0;border-top:1px solid var(--border);color:var(--text-soft)}
+footer h2{font-size:1.6rem;margin:0 0 .6rem;color:var(--text);letter-spacing:-.025em}
+footer p{margin:0 0 1.4rem;max-width:34rem}
+.colophon{margin-top:2.5rem;font-family:var(--mono);font-size:.72rem;color:var(--text-mute);opacity:.8}
+
+/* ---- respect reduced motion ---- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="wrap">
+
+<!-- ======================= HERO ======================= -->
+<header class="hero">
+  <div>
+    <span class="status"><span class="dot"></span> Always building things that see, hear, and read</span>
+    <h1>Femina Senjaliya</h1>
+    <p class="tagline">
+      I build production systems that understand
+      <span class="rotor" id="rotor"><span>documents</span></span>,<br>
+      and then have to be right about it.
+    </p>
+    <div class="pills">
+      <a class="pill" href="mailto:senjaliyafemina5@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        Email
+      </a>
+      <a class="pill" href="https://www.linkedin.com/in/femina-senjaliya">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 21h5.2V9.2H2.4V21zM9.6 9.2V21h5.2v-6.4c0-3.1 4-3.4 4 0V21h5.2v-8.2c0-6.6-7-6.4-9.2-3.1V9.2H9.6z"/></svg>
+        LinkedIn
+      </a>
+      <a class="pill" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=femina+senjaliya">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 8.5 12 14l10-5.5L12 3z"/><path d="M5 11v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg>
+        Google Scholar
+      </a>
+    </div>
+  </div>
+
+  <figure class="portrait">
+    <img src="portrait.jpg" width="600" height="750"
+         alt="Portrait of Femina Senjaliya"
+         onerror="this.closest('.portrait').style.display='none'">
+  </figure>
+</header>
+
+<div class="intro rv">
+  <hr class="lead-rule">
+  <p>
+    Most of my work lives at the seam between modalities: where a document is also an image,
+    where audio has to become searchable text, where a model's output needs a second system to
+    decide whether to trust it. The interesting part is almost never the model. It's everything
+    that has to be true around it.
+  </p>
+  <p>
+    Currently at <strong>Waterworth</strong>, where I own a document-intelligence platform
+    serving multiple enterprise clients. Before that, multimodal audio at
+    <strong>Avid Technology</strong> and underwater acoustic computer vision at
+    <strong>ASL Environmental Sciences</strong>. MASc from the University of Victoria;
+    four IEEE/CVF publications on teaching models to see things humans find tedious to label.
+  </p>
+</div>
+
+<!-- ======================= SYSTEMS ======================= -->
+<section id="work">
+  <div class="sec-head rv"><h2>Systems I've Built</h2><span class="count">04</span></div>
+
+  <!-- ---- 01 WATERWORTH ---- -->
+  <article class="system rv">
+    <span class="num">01</span>
+    <div class="system-head">
+      <h3>Document Intelligence at Scale</h3>
+      <span class="where">Waterworth · 2025–present</span>
+    </div>
+    <p class="system-sub">
+      Turning large archives of unstructured municipal records, much of it scanned paper with
+      no text layer, into structured, queryable data.
+    </p>
+
+    <div class="block">
+      <span class="label">The problem</span>
+      <p>
+        Government records are close to a worst-case document corpus: decades of scanned paper,
+        inconsistent layouts, and legal text where a missed entity isn't a rounding error, it's
+        a wrong answer. Clients want to query all of it like a database. Off-the-shelf OCR
+        gives you characters, not meaning. A single LLM pass over noisy OCR will
+        hallucinate confidently enough to be genuinely dangerous in a regulatory context.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Why this problem class is hard</span>
+      <p>
+        <em>Everything starts as pixels.</em> Scanned records have no text layer, so the pipeline
+        can't begin at the language model. It has to begin with layout understanding and work
+        upward. Errors there propagate to everything downstream.
+      </p>
+      <p>
+        <em>Institutional documents love borderless tables.</em> Rows separated by whitespace
+        alone defeat parsers that key on ruling lines, so table structure has to be recovered
+        from geometry rather than read off the page.
+      </p>
+      <p>
+        <em>Partial credit doesn't exist.</em> An entity attributed to the wrong section is worse
+        than no answer, because it looks correct. That shapes everything about how you evaluate
+        the system: recall alone is a misleading number, and confident wrong answers are the
+        failure mode worth engineering against.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">What I own</span>
+      <p>
+        I authored and own the platform end to end: the document-vision layer that turns scans
+        into structured regions and text, the extraction layer that turns that into typed data,
+        the validation layer that decides how much of it to trust, and the retrieval APIs that
+        serve semantic search and RAG on top. Alongside it, the orchestration that lets
+        non-technical domain experts run client data ingest themselves with no engineer in the
+        loop, and the evaluation harness and release gates that catch extraction regressions
+        before they reach production rather than after a client notices a wrong answer.
+      </p>
+      <p>
+        The outcome I care most about isn't an accuracy number. It's that the people who
+        understand the documents can now operate the system without me.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Stack</span>
+      <ul class="stack">
+        <li>Azure OpenAI</li><li>FastAPI</li><li>Cosmos DB</li><li>DocLayout-YOLO</li>
+        <li>Tesseract</li><li>PyMuPDF</li><li>OpenCV</li><li>Apache Airflow</li>
+        <li>Azure Kubernetes Service</li><li>Docker</li><li>GitHub Actions</li><li>Pytest</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ---- 02 AVID ---- -->
+  <article class="system rv">
+    <span class="num">02</span>
+    <div class="system-head">
+      <h3>Multimodal Audio Understanding</h3>
+      <span class="where">Avid Technology · 2024–2025</span>
+    </div>
+    <p class="system-sub">
+      Making large professional audio libraries searchable and conversational in natural language.
+    </p>
+
+    <div class="block">
+      <span class="label">The problem</span>
+      <p>
+        Audio libraries are effectively opaque. Filenames and manual tags are all most systems
+        have to go on, which means the thing you need is findable only if someone already
+        described it the way you're about to search for it. The goal was to let people ask for
+        what they wanted in plain language and get the right audio back.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Why it's hard</span>
+      <p>
+        <em>Audio has no natural index.</em> Text search works because text is already symbols.
+        Audio is a waveform until a model decides otherwise, so retrieval quality is bounded by
+        how good your encoder is before a single query is ever run.
+      </p>
+      <p>
+        <em>The ground truth is subjective.</em> Whether a tag "sounds right" is a judgement call,
+        which means the evaluation metrics have to be defined before the model can be said to
+        improve at all. I defined and tracked those metrics, so the 19% is measured against them,
+        not against a vibe.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Architecture</span>
+      <div class="pipeline">
+        <div class="stage"><b>Audio encoding</b><span>Fine-tuned CLAP and Qwen-Audio for tagging &amp; classification</span></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>Retrieval</b><span>RAG layer over the audio library</span></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>Reasoning</b><span>GPT-4, LLaMA, Mistral for natural-language chat</span></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>Services</b><span>Voice cloning and semantic search, productionized</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="label">Results</span>
+      <div class="results">
+        <div class="metric"><span class="n" data-count="19" data-prefix="+" data-suffix="%">+19%</span><span class="d">audio tagging accuracy</span></div>
+        <div class="metric"><span class="n" data-count="3">3</span><span class="d">services adopted by internal product teams</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="label">Stack</span>
+      <ul class="stack">
+        <li>CLAP</li><li>Qwen-Audio</li><li>GPT-4</li><li>LLaMA</li><li>Mistral</li>
+        <li>Azure</li><li>Hugging Face Transformers</li><li>TorchAudio</li><li>Whisper</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ---- 03 ASL ---- -->
+  <article class="system rv">
+    <span class="num">03</span>
+    <div class="system-head">
+      <h3>Annotation-Efficient Segmentation for Underwater Acoustics</h3>
+      <span class="where">ASL Environmental Sciences · 2022–2024</span>
+    </div>
+    <p class="system-sub">
+      Deep learning on Arctic and Pacific echograms, where the bottleneck was never compute but
+      expert time. In alliance with Mitacs and NSERC Canada.
+    </p>
+
+    <div class="block">
+      <span class="label">The problem</span>
+      <p>
+        Echograms are read by marine biologists, and there are very few of them. Every labelled
+        example costs scarce expert attention, so the usual answer of labelling more data simply
+        wasn't available. The real question was how to get good segmentation out of annotations
+        that were naive, sparse, or partially wrong.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Why it's hard</span>
+      <p>
+        <em>You cannot buy your way out with data.</em> Most segmentation results assume labels
+        are cheap. Here the labelling budget was the binding constraint, which pushes the problem
+        away from architecture search and toward learning strategy.
+      </p>
+      <p>
+        <em>Acoustic boundaries are fuzzy.</em> Ocean boundary phenomena don't have crisp edges
+        the way objects in photographs do, so generic segmentation losses optimise for the wrong
+        thing, hence boundary-aware and class-aware loss functions built for the structure of
+        the data rather than borrowed from natural images.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Approach</span>
+      <p>
+        A two-step model combining image classification with semantic segmentation, using boundary
+        loss functions and class-aware losses designed around acoustic data. Semi-automatic
+        labelling algorithms generated ground truth that experts corrected rather than authored,
+        turning the expensive step into a review task. U-Net, DeepLab, InceptionV3, and ResNet
+        variants were trained and compared on CUDA GPUs across large multi-frequency datasets.
+        The work became four peer-reviewed publications and a master's thesis.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Results</span>
+      <div class="results">
+        <div class="metric"><span class="n" data-count="75" data-prefix="−" data-suffix="%">−75%</span><span class="d">biologist analysis time</span></div>
+        <div class="metric"><span class="n" data-count="4">4</span><span class="d">peer-reviewed publications</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="label">Stack</span>
+      <ul class="stack">
+        <li>PyTorch</li><li>U-Net</li><li>DeepLab</li><li>ResNet</li><li>InceptionV3</li>
+        <li>OpenCV</li><li>CUDA</li><li>Labelbox</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ---- 04 ARCHIPELAGO ---- -->
+  <article class="system rv">
+    <span class="num">04</span>
+    <div class="system-head">
+      <h3>Real-Time Fish Detection on Fishing Video</h3>
+      <span class="where">Archipelago Marine Research · 2023</span>
+    </div>
+    <p class="system-sub">
+      Computer vision for electronic monitoring of long-line fisheries, running on real-world
+      vessel footage, complete with salt spray, bad light, and a moving deck.
+    </p>
+
+    <div class="block">
+      <span class="label">What actually mattered</span>
+      <p>
+        Built real-time detection reaching 84% accuracy on long-line fishing video. The
+        instructive part: the biggest gains didn't come from the model. Leading the iterative
+        development of the annotation system feeding it raised data collection efficiency by 70%
+        and drove most of the accuracy improvement. I also owned the MLOps side: data pipelines,
+        model versioning, and deployment through Azure Machine Learning, MLflow, and CI/CD.
+      </p>
+      <p>
+        It's the clearest example I have of a lesson that keeps recurring in this work: the
+        leverage is usually upstream of the model.
+      </p>
+    </div>
+
+    <div class="block">
+      <span class="label">Results</span>
+      <div class="results">
+        <div class="metric"><span class="n" data-count="84" data-suffix="%">84%</span><span class="d">detection accuracy</span></div>
+        <div class="metric"><span class="n" data-count="70" data-prefix="+" data-suffix="%">+70%</span><span class="d">data collection efficiency</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="label">Stack</span>
+      <ul class="stack">
+        <li>PyTorch</li><li>OpenCV</li><li>Azure Machine Learning</li><li>MLflow</li><li>CI/CD</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ======================= PUBLICATIONS ======================= -->
+<section id="publications">
+  <div class="sec-head rv"><h2>Publications</h2><span class="count">05</span></div>
+  <div class="rv">
+    <div class="pub">
+      <span class="t">Deep Learning-Based Identification of Arctic Ocean Boundaries and Near-Surface Phenomena in Underwater Echogram</span>
+      <span class="v">IEEE/CVF CVPR, Perception Beyond the Visible Spectrum · June 2024</span>
+    </div>
+    <div class="pub">
+      <span class="t">Detecting Underwater Discrete Scatterers in Echograms with Deep Learning-Based Semantic Segmentation</span>
+      <span class="v">IEEE/CVF CVPR, Perception Beyond the Visible Spectrum · June 2023</span>
+    </div>
+    <div class="pub">
+      <span class="t">Refining Naive Annotations with Limited Expert Guidance for Semantic Segmentation: A Case Study on Underwater Echograms</span>
+      <span class="v">IEEE/CVF ICCV Workshops · January 2023</span>
+    </div>
+    <div class="pub">
+      <span class="t">Computer Vision-based Echogram Annotation Methods for Acoustic Classification with Deep Learning Systems</span>
+      <span class="v">ICES Fisheries and Plankton Acoustic Symposium · January 2023</span>
+    </div>
+    <div class="pub">
+      <span class="t">Analyzing Ocean Boundary Phenomena in Echograms: A Deep Learning Approach</span>
+      <span class="v">MASc Thesis, University of Victoria · April 2024</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BACKGROUND ======================= -->
+<section id="background">
+  <div class="sec-head rv"><h2>Background</h2></div>
+  <div class="edu rv">
+    <div>
+      <b>MASc, Electrical &amp; Computer Engineering</b>
+      <span>University of Victoria, 2024. Thesis in deep learning for underwater acoustics</span>
+    </div>
+    <div>
+      <b>BE, Computer Engineering</b>
+      <span>Gujarat Technological University, 2021</span>
+    </div>
+  </div>
+  <p class="rv" style="color:var(--text-soft);max-width:44rem;margin:0">
+    Before moving into ML full time I worked as a software engineer at Crest Data Systems,
+    where I led CI/CD across development, QA, and SRE. That infrastructure background is most
+    of the reason the systems above actually ship instead of staying in notebooks.
+  </p>
+</section>
+
+<footer class="rv">
+  <h2>Let's talk</h2>
+  <p>
+    I'm interested in problems where several modalities have to work together and the result
+    has to hold up in production. If that's what you're building, get in touch.
+  </p>
+  <div class="pills">
+    <a class="pill" href="mailto:senjaliyafemina5@gmail.com">senjaliyafemina5@gmail.com</a>
+    <a class="pill" href="https://www.linkedin.com/in/femina-senjaliya">LinkedIn</a>
+    <a class="pill" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=femina+senjaliya">Google Scholar</a>
+  </div>
+  <p class="colophon">Hand-written HTML &amp; CSS. No frameworks, no trackers, no third-party requests.</p>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- scroll progress bar ---- */
+  var prog = document.getElementById('prog');
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (reduced) {
+    document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+
+  /* ---- rotating modality word ---- */
+  var words = ['documents', 'speech', 'images', 'sonar', 'language'];
+  var rotor = document.getElementById('rotor'), i = 0;
+  setInterval(function () {
+    i = (i + 1) % words.length;
+    rotor.innerHTML = '<span>' + words[i] + '</span>';
+  }, 2400);
+
+  /* ---- scroll reveal + metric count-up ---- */
+  function countUp(el) {
+    var target = parseFloat(el.dataset.count);
+    var pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+    var dur = 900, t0 = performance.now();
+    (function step(now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + Math.round(target * eased) + suf;
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      e.target.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  document.querySelectorAll('.rv').forEach(function (el, n) {
+    el.style.transitionDelay = Math.min(n * 40, 160) + 'ms';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
